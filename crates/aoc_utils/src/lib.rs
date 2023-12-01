@@ -1,15 +1,16 @@
+use std::fmt::Debug;
 use std::fs;
 use std::panic;
 
-pub trait AocDay {
+pub trait AocDay<P1: Debug, P2: Debug> {
     /// The number of the day that the solution is for.
     const DAY: u8;
 
     /// The implementation of the first part of the puzzle.
-    fn part_1(input: &str);
+    fn part_1(input: &str) -> P1;
 
     /// The implementation of the second part of the puzzle.
-    fn part_2(input: &str);
+    fn part_2(input: &str) -> P2;
 
     /// Try to get the input file for this day.
     fn get_input() -> String {
@@ -23,10 +24,10 @@ pub trait AocDay {
     fn run() {
         let input = Self::get_input();
 
-        println!("PART 1:");
-        Self::part_1(&input);
+        print!("PART 1: ");
+        println!("{:?}", Self::part_1(&input));
 
-        println!("\n\nPART 2:");
-        Self::part_2(&input);
+        print!("\nPART 2: ");
+        println!("{:?}", Self::part_2(&input));
     }
 }
