@@ -27,7 +27,7 @@ pub trait AocDay<P1: Debug, P2: Debug> {
         print!("PART 1: ");
         println!("{:?}", Self::part_1(&input));
 
-        print!("\nPART 2: ");
+        print!("PART 2: ");
         println!("{:?}", Self::part_2(&input));
     }
 }
