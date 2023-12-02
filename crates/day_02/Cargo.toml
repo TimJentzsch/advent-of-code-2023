@@ -7,5 +7,4 @@ edition = "2021"
 
 [dependencies]
 aoc_utils = { path = "../aoc_utils" }
-regex = { workspace = "true" }
 nom = { workspace = "true" }

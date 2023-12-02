@@ -51,6 +51,12 @@ pub fn parse_game(input: &str) -> IResult<&str, Game> {
     Ok((input, Game { id, reveals }))
 }
 
+pub fn parse_full_game(input: &str) -> Game {
+    let (rest, game) = parse_game(input).unwrap();
+    assert_eq!(rest, "");
+    game
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

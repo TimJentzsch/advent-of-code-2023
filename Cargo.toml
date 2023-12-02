@@ -3,5 +3,4 @@ resolver = "2"
 members = ["crates/*"]
 
 [workspace.dependencies]
-regex = "1.10.2"
 nom = "7.1.3"

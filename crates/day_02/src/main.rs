@@ -1,4 +1,5 @@
 use aoc_utils::AocDay;
+use parser::parse_full_game;
 
 mod parser;
 mod types;
@@ -12,8 +13,18 @@ struct Day02;
 impl AocDay<u32, ()> for Day02 {
     const DAY: u8 = 2;
 
-    fn part_1(_input: &str) -> u32 {
-        todo!()
+    fn part_1(input: &str) -> u32 {
+        input
+            .trim()
+            .lines()
+            .map(parse_full_game)
+            .filter(|game| {
+                game.reveals
+                    .iter()
+                    .all(|reveal| reveal.red() <= 12 && reveal.green() <= 13 && reveal.blue() <= 14)
+            })
+            .map(|game| game.id)
+            .sum()
     }
 
     fn part_2(_input: &str) {
