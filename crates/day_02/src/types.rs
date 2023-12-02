@@ -47,3 +47,13 @@ pub struct Game {
     pub id: u32,
     pub reveals: Vec<Reveal>,
 }
+
+impl Game {
+    pub fn min_set_power(&self) -> u32 {
+        let min_red = self.reveals.iter().map(Reveal::red).max().unwrap_or(0);
+        let min_green = self.reveals.iter().map(Reveal::green).max().unwrap_or(0);
+        let min_blue = self.reveals.iter().map(Reveal::blue).max().unwrap_or(0);
+
+        min_red * min_green * min_blue
+    }
+}
