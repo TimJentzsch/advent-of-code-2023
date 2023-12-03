@@ -16,7 +16,7 @@ pub trait AocDay<P1: Debug, P2: Debug> {
     fn get_input() -> String {
         let file_name = format!("day_{:0>2}.txt", Self::DAY);
 
-        fs::read_to_string(format!("../inputs/{file_name}")).unwrap_or_else(|_| {
+        fs::read_to_string(format!("inputs/{file_name}")).unwrap_or_else(|_| {
             panic!("Failed to read input file, make sure to add it at /inputs/{file_name}",)
         })
     }
