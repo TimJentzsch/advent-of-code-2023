@@ -24,10 +24,10 @@ pub trait AocDay<P1: Debug, P2: Debug> {
     fn run() {
         let input = Self::get_input();
 
-        print!("PART 1: ");
-        println!("{:?}", Self::part_1(&input));
+        eprint!("PART 1: ");
+        eprintln!("{:?}", Self::part_1(&input));
 
-        print!("PART 2: ");
-        println!("{:?}", Self::part_2(&input));
+        eprint!("PART 2: ");
+        eprintln!("{:?}", Self::part_2(&input));
     }
 }
