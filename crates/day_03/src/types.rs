@@ -35,6 +35,39 @@ impl Schematic {
 
         part_numbers
     }
+
+    pub fn gear_ratios(&self) -> u32 {
+        let mut gear_ratio = 0;
+
+        for (line, symbols) in self.symbol_lines.iter().enumerate() {
+            for symbol in symbols {
+                if symbol.text != '*' {
+                    continue;
+                }
+
+                let mut part_numbers = Vec::new();
+
+                // Try to find an adjacent numbers for the symbol
+                for num_line in [line.saturating_sub(1), line, line + 1] {
+                    let Some(numbers) = self.number_lines.get(num_line) else {
+                        continue;
+                    };
+
+                    for number in numbers {
+                        if number.is_horizontally_adjacent_to(symbol) {
+                            part_numbers.push(number.clone());
+                        }
+                    }
+                }
+
+                if part_numbers.len() == 2 {
+                    gear_ratio += part_numbers[0].value * part_numbers[1].value;
+                }
+            }
+        }
+
+        gear_ratio
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
