@@ -10,3 +10,6 @@ This repository collects my solutions for the 2023 puzzles, implemented in Rust.
 First, make sure to [install Rust](https://www.rust-lang.org/learn/get-started).
 Then, clone the repository and add an `inputs/day_XX.txt` file containing the puzzle input. It is discouraged to publish the puzzle inputs, so they are ignored by git.
 Finally, use `cargo run --bin day_XX` to solve the puzzle.
+
+To benchmark the performance of the implementation, use `cargo run --bin day_XX -- --bench`.
+To run only one of the puzzle parts, use e.g. `cargo run --bin day_XX -- --part_2`.

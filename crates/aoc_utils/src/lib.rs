@@ -1,6 +1,9 @@
 use std::fmt::Debug;
+use std::fmt::Display;
 use std::fs;
+use std::hint::black_box;
 use std::panic;
+use std::time::Duration;
 use std::time::Instant;
 
 use clap::Parser;
@@ -15,9 +18,13 @@ struct Cli {
     /// Run the second part of the puzzle
     #[arg(long)]
     part_2: bool,
+
+    /// Benchmark the implementation
+    #[arg(long)]
+    bench: bool,
 }
 
-pub trait AocDay<P1: Debug, P2: Debug> {
+pub trait AocDay<P1: Eq + Debug, P2: Eq + Debug> {
     /// The number of the day that the solution is for.
     const DAY: u8;
 
@@ -63,21 +70,61 @@ pub trait AocDay<P1: Debug, P2: Debug> {
 
         if part_1 {
             eprint!("PART 1: ");
-            let start_part_1 = Instant::now();
-            let res_part_1 = Self::part_1(&input);
-            let time_part_1 = start_part_1.elapsed();
-            eprintln!("{:?} [{:?}]", res_part_1, time_part_1);
+            eprintln!("{}", run_part(Self::part_1, &input, cli.bench));
         }
 
         if part_2 {
             eprint!("PART 2: ");
-            let start_part_2 = Instant::now();
-            let res_part_2 = Self::part_2(&input);
-            let time_part_2 = start_part_2.elapsed();
-            eprintln!("{:?} [{:?}]", res_part_2, time_part_2);
+            eprintln!("{}", run_part(Self::part_2, &input, cli.bench));
         }
 
         let time = start.elapsed();
         eprintln!("----\nFinished in {:?}", time);
     }
+}
+
+struct RunResult<T: Debug> {
+    res: T,
+    times: Vec<Duration>,
+}
+
+impl<T: Debug> Display for RunResult<T> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        if self.times.len() == 1 {
+            write!(f, "{:?} [{:?}]", self.res, self.times[0])
+        } else {
+            let avg = self.times.iter().sum::<Duration>() / self.times.len() as u32;
+            let min = self.times.iter().min().unwrap();
+            let max = self.times.iter().max().unwrap();
+            let deviation = (avg - *min).max(*max - avg);
+
+            write!(
+                f,
+                "{:?} [{:?} ± {:?}, {} samples]",
+                self.res,
+                avg,
+                deviation,
+                self.times.len()
+            )
+        }
+    }
+}
+
+fn run_part<T: Eq + Debug>(part: impl Fn(&str) -> T, input: &str, bench: bool) -> RunResult<T> {
+    let mut times = Vec::new();
+
+    let start = Instant::now();
+    let res = part(black_box(input));
+    times.push(start.elapsed());
+
+    if bench {
+        while start.elapsed() < Duration::from_secs(5) {
+            let iter_start = Instant::now();
+            let iter_res = part(black_box(input));
+            times.push(iter_start.elapsed());
+            assert_eq!(res, iter_res);
+        }
+    }
+
+    RunResult { res, times }
 }
