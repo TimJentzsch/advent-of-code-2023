@@ -23,7 +23,19 @@ pub trait AocDay<P1: Debug, P2: Debug> {
     }
 
     fn run() {
+        let start = Instant::now();
+
+        eprintln!("DAY {:0>2}\n----", Self::DAY);
+        eprint!("INPUT: ");
+        let start_input = Instant::now();
         let input = Self::get_input();
+        let time_input = start_input.elapsed();
+        eprintln!(
+            "inputs/day_{:0>2}.txt ({} lines) [{:?}]",
+            Self::DAY,
+            input.lines().count(),
+            time_input
+        );
 
         eprint!("PART 1: ");
         let start_part_1 = Instant::now();
@@ -36,5 +48,8 @@ pub trait AocDay<P1: Debug, P2: Debug> {
         let res_part_2 = Self::part_2(&input);
         let time_part_2 = start_part_2.elapsed();
         eprintln!("{:?} [{:?}]", res_part_2, time_part_2);
+
+        let time = start.elapsed();
+        eprintln!("----\nFinished in {:?}", time);
     }
 }
