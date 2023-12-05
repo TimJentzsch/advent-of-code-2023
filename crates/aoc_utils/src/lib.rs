@@ -1,6 +1,7 @@
 use std::fmt::Debug;
 use std::fs;
 use std::panic;
+use std::time::Instant;
 
 pub trait AocDay<P1: Debug, P2: Debug> {
     /// The number of the day that the solution is for.
@@ -25,9 +26,15 @@ pub trait AocDay<P1: Debug, P2: Debug> {
         let input = Self::get_input();
 
         eprint!("PART 1: ");
-        eprintln!("{:?}", Self::part_1(&input));
+        let start_part_1 = Instant::now();
+        let res_part_1 = Self::part_1(&input);
+        let time_part_1 = start_part_1.elapsed();
+        eprintln!("{:?} [{:?}]", res_part_1, time_part_1);
 
         eprint!("PART 2: ");
-        eprintln!("{:?}", Self::part_2(&input));
+        let start_part_2 = Instant::now();
+        let res_part_2 = Self::part_2(&input);
+        let time_part_2 = start_part_2.elapsed();
+        eprintln!("{:?} [{:?}]", res_part_2, time_part_2);
     }
 }
