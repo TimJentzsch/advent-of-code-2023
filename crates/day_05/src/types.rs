@@ -16,12 +16,9 @@ impl Almanac {
             .iter()
             .fold(self.seeds.clone(), |acc, map| map.get_many(acc))
             .iter()
-            .filter_map(|source| {
-                if source.is_empty() {
-                    None
-                } else {
-                    Some(source.start)
-                }
+            .map(|source| {
+                debug_assert!(!source.is_empty());
+                source.start
             })
             .min()
             .unwrap()
