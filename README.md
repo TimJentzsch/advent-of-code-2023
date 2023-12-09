@@ -27,3 +27,12 @@ To run only one of the puzzle parts, use e.g. `cargo run --bin day_XX -- --part_
 | [Day 07](https://adventofcode.com/2023/day/7) | ⭐⭐      |
 | [Day 08](https://adventofcode.com/2023/day/8) | ⭐        |
 | [Day 09](https://adventofcode.com/2023/day/9) | ⭐⭐      |
+
+## License
+
+The code in this repository is dual-licensed under either:
+
+- MIT License ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
+- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or <http://www.apache.org/licenses/LICENSE-2.0>)
+
+at your option.
