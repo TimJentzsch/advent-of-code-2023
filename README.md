@@ -13,3 +13,17 @@ Finally, use `cargo run --bin day_XX` to solve the puzzle.
 
 To benchmark the performance of the implementation, use `cargo run --bin day_XX -- --bench`.
 To run only one of the puzzle parts, use e.g. `cargo run --bin day_XX -- --part_2`.
+
+## Progress
+
+| **Day**                                       | **Stars** |
+| --------------------------------------------- | --------- |
+| [Day 01](https://adventofcode.com/2023/day/1) | ⭐⭐      |
+| [Day 02](https://adventofcode.com/2023/day/2) | ⭐⭐      |
+| [Day 03](https://adventofcode.com/2023/day/3) | ⭐⭐      |
+| [Day 04](https://adventofcode.com/2023/day/4) | ⭐⭐      |
+| [Day 05](https://adventofcode.com/2023/day/5) | ⭐⭐      |
+| [Day 06](https://adventofcode.com/2023/day/6) | ⭐⭐      |
+| [Day 07](https://adventofcode.com/2023/day/7) | ⭐⭐      |
+| [Day 08](https://adventofcode.com/2023/day/8) | ⭐        |
+| [Day 09](https://adventofcode.com/2023/day/9) | ⭐⭐      |
