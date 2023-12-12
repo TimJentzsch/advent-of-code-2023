@@ -34,13 +34,23 @@ pub trait AocDay<P1: Eq + Debug, P2: Eq + Debug> {
     /// The implementation of the second part of the puzzle.
     fn part_2(input: &str) -> P2;
 
+    /// The name of the file for this day.
+    fn get_file_name() -> String {
+        format!("day_{:0>2}.txt", Self::DAY)
+    }
+
+    /// The path to the input file for this day.
+    fn get_file_path() -> String {
+        format!("inputs/{}", Self::get_file_name())
+    }
+
     /// Try to get the input file for this day.
     fn get_input() -> String {
-        let file_name = format!("day_{:0>2}.txt", Self::DAY);
+        let file_path = Self::get_file_path();
 
-        fs::read_to_string(format!("inputs/{file_name}"))
+        fs::read_to_string(file_path.clone())
             .unwrap_or_else(|_| {
-                panic!("Failed to read input file, make sure to add it at /inputs/{file_name}",)
+                panic!("Failed to read input file, make sure to add it at {file_path}",)
             })
             .trim_end()
             .to_string()
@@ -62,8 +72,8 @@ pub trait AocDay<P1: Eq + Debug, P2: Eq + Debug> {
         let input = Self::get_input();
         let time_input = start_input.elapsed();
         eprintln!(
-            "inputs/day_{:0>2}.txt ({} lines) [{:?}]",
-            Self::DAY,
+            "{} ({} lines) [{:?}]",
+            Self::get_file_path(),
             input.lines().count(),
             time_input
         );
