@@ -20,7 +20,7 @@ impl<const SIZE: usize> AocDay<usize, usize> for Day14<SIZE> {
         const ITERATIONS: usize = 1_000_000_000;
 
         let mut platform = Platform::<SIZE>::parse(input);
-        let mut cache = Vec::with_capacity(100_000);
+        let mut cache = Vec::with_capacity(100);
 
         for iter in 1..=ITERATIONS {
             cache.push(platform.clone());
