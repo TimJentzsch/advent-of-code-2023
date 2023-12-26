@@ -1,7 +1,6 @@
-resolver = "2"
-
 [workspace]
 members = ["aoc_utils", "days/*"]
+resolver = "2"
 
 [workspace.package]
 license = "MIT OR Apache-2.0"
