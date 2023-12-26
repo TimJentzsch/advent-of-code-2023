@@ -1,6 +1,6 @@
 [workspace]
-resolver = "2"
-members = ["crates/*"]
+members = ["aoc_utils", "days/*"]
 
+resolver = "2"
 [workspace.dependencies]
 nom = "7.1.3"
